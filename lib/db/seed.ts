@@ -1,3 +1,7 @@
+console.log("Début du script seed");
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { db, loginTable, a2fTable, entrepriseTable, dataTable } from "./schema"
 import bcrypt from "bcryptjs"
 import { sql } from "drizzle-orm"
@@ -6,8 +10,12 @@ async function hash(str: string) {
   return await bcrypt.hash(str, 10)
 }
 
+console.log("POSTGRES_URL :", process.env.POSTGRES_URL);
+
+console.log("Lancement function seed");
 export async function seed() {
   try {
+    console.log("Debut du try function seed");
     const existingLogin = await db.select().from(loginTable).limit(1)
 
     if (existingLogin.length === 0) {
