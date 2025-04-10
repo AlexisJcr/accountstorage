@@ -36,7 +36,7 @@ export async function seed() {
 
     if (existingA2F.length === 0) {
       await db.insert(a2fTable).values({
-        code: "29430",
+        code: await hash("29430"),
       })
 
       console.log("Code A2F créé")
