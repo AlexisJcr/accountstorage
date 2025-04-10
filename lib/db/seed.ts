@@ -10,8 +10,6 @@ async function hash(str: string) {
   return await bcrypt.hash(str, 10)
 }
 
-console.log("POSTGRES_URL :", process.env.POSTGRES_URL);
-
 console.log("Lancement function seed");
 export async function seed() {
   try {
@@ -19,7 +17,7 @@ export async function seed() {
     const existingLogin = await db.select().from(loginTable).limit(1)
 
     if (existingLogin.length === 0) {
-      const hashedPassword = await hash("energix-superadmin")
+      const hashedPassword = await hash("energix-superadmin");
 
       await db.insert(loginTable).values({
         nom: await hash("Informatique"),
